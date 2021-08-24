@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { TaskRow } from './components/TaskRow';
 import { TaskBanner } from './components/TaskBanner';
 import { TaskCreator } from './components/TaskCreator';
@@ -9,14 +9,26 @@ function App() {
   // Definimos algunos estados
   const [username, setuserName] = useState('Ethan');
   const [taskItems, settaskItems] = useState([
-    { name: "Task one", done: false },
-    { name: "Task two", done: true },
-    { name: "Task three", done: false },
-    { name: "Task Four", done: false },
+    
   ]);
 
   // Muestra las tareas completadas
   const [showCompleted, setshowCompleted] = useState(true);
+
+  // Ejecuta una función
+  useEffect(() => {
+    let data = localStorage.getItem("task");
+    if(data != null){
+      settaskItems(JSON.parse(data));
+    }else{
+      settaskItems([
+        { name: "Correr", done: false },
+        { name: "Task two", done: true },
+        { name: "Task three", done: false },
+        { name: "Task Four", done: false },
+      ]);
+    }
+  })
 
   // Cambiamos el estado de DONE, recorriendo cada tarea                            se hace una copia (...)
   const toggleTask = task => settaskItems(taskItems.map(t => (t.name === task.name ? {...t, done: !t.done} : t)));
