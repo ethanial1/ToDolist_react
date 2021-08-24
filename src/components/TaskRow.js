@@ -6,7 +6,10 @@ export const TaskRow = props => (
             {props.task.name}
         </td>
         <td>
-            <input type="checkbox" id="" checked = {props.task.done} onChange={props.toggleTask}/>
+            <input 
+            type="checkbox"
+            checked = {props.task.done} 
+            onChange={() => props.toggleTask(props.task)}/>
         </td>
     </tr>
 );

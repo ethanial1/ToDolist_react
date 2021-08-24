@@ -22,7 +22,8 @@ function App() {
    
   return (
     <div className="App">
-      <table>
+      <h1>To-Do</h1>
+      <table className="table table-striped table-bordered">
         <thead>
           <tr>
             <th>Description</th>
