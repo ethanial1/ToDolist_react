@@ -21,14 +21,21 @@ function App() {
     if(data != null){
       settaskItems(JSON.parse(data));
     }else{
+      setuserName('Ethan');
       settaskItems([
         { name: "Correr", done: false },
         { name: "Task two", done: true },
         { name: "Task three", done: false },
         { name: "Task Four", done: false },
       ]);
+      setshowCompleted(true);
     }
-  })
+  }, []);
+
+  useEffect(() => {
+    // guardamos los cambios en el localStorage
+    localStorage.setItem('task', JSON.stringify(taskItems))
+  }, [taskItems]);
 
   // Cambiamos el estado de DONE, recorriendo cada tarea                            se hace una copia (...)
   const toggleTask = task => settaskItems(taskItems.map(t => (t.name === task.name ? {...t, done: !t.done} : t)));
